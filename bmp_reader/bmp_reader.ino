@@ -15,6 +15,7 @@ SimpleKalmanFilter TempKalmanFilter(1, 1, 0.01);
 //SimpleKalmanFilter TempKalmanFilter(0.5, 0.5, 0.01);
 
 #define SEALEVELPRESSURE_HPA (1013.25)
+#define BMP_CS 36
 
 Adafruit_BMP3XX bmp;
 
@@ -23,9 +24,9 @@ void setup() {
   while (!Serial);
   Serial.println("Adafruit BMP390");
 
-  if (!bmp.begin_I2C()) {   // hardware I2C mode, can pass in address & alt Wire
-  //if (! bmp.begin_SPI(BMP_CS)) {  // hardware SPI mode  
-  //if (! bmp.begin_SPI(BMP_CS, BMP_SCK, BMP_MISO, BMP_MOSI)) {  // software SPI mode
+//  if (!bmp.begin_I2C()) {   // hardware I2C mode, can pass in address & alt Wire
+  if (! bmp.begin_SPI(BMP_CS)) {  // hardware SPI mode  
+//  if (! bmp.begin_SPI(BMP_CS, BMP_SCK, BMP_MISO, BMP_MOSI)) {  // software SPI mode
     Serial.println("Could not find a valid BMP3xx sensor, check wiring!");
     while (1);
   }
